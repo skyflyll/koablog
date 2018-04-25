@@ -1,0 +1,29 @@
+<%- include('head') %>
+    <div class="login-wrap">
+        <form action="/register" method="post">
+            <div class="user-wrap">
+                <label for="user">用户名:</label>
+                <input type="text" name="user" placeholder="用户名">
+            </div>
+            <div class="pass-wrap">
+                <label for="pass">密码:</label>
+                <input type="password" name="pass" placeholder="用户密码">
+            </div>
+            <div class="rpass-wrap">
+                <label for="rpass">确认密码:</label>
+                <input type="password" name="rpass" placeholder="再次输入用户密码">
+            </div>
+            <div class="avatar-wrap">
+                <label for="avatar">头像:</label>
+                <input type="file">
+            </div>
+            <div class="describe-wrap">
+                <label for="self"></label>
+                <textarea name="self" id="describe" cols="30" rows="10" placeholder="自我描述"></textarea>
+            </div>
+            <div class="button-wrap">
+                <input class="btn" type="submit" value="提交注册"></button>
+            </div>
+        </form>
+    </div>
+<%- include('foot') %>
