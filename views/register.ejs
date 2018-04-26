@@ -1,6 +1,6 @@
 <%- include('head') %>
     <div class="login-wrap">
-        <form action="/register" method="post">
+            <form action="/register" method="post" enctype="multipart/form-data">
             <div class="user-wrap">
                 <label for="user">用户名:</label>
                 <input type="text" name="user" placeholder="用户名">
@@ -13,17 +13,36 @@
                 <label for="rpass">确认密码:</label>
                 <input type="password" name="rpass" placeholder="再次输入用户密码">
             </div>
+            <div class="sex-wrap">
+                <label for="sex">性别:</label>
+                <select name="sex">
+                    <option value="boy">男</option>
+                    <option value="girl">女</option>
+                    <option value="secret">保密</option>
+                </select>
+            </div>
             <div class="avatar-wrap">
                 <label for="avatar">头像:</label>
-                <input type="file">
+                <input type="file" name="file">
             </div>
             <div class="describe-wrap">
-                <label for="self"></label>
-                <textarea name="self" id="describe" cols="30" rows="10" placeholder="自我描述"></textarea>
+                <label for="describe"></label>
+                <textarea name="describe" id="describe" cols="30" rows="10" placeholder="自我描述"></textarea>
             </div>
             <div class="button-wrap">
-                <input class="btn" type="submit" value="提交注册"></button>
+                <input class="btn" type="submit" value="提交注册">
             </div>
         </form>
     </div>
-<%- include('foot') %>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- <script>
+        $(document).ready(function(){
+            var $form = $("#form");
+            var $user = $form.find('input[name=user]');
+            var $pass = $form.find('input[name=pass]');
+            var $rpass = $form.find('input[name=rpass]');
+            var $self = $form.find('input[name=self]');
+            var $file = $form.find('input[name=file]');
+        })
+    </script> -->
+    <%- include('foot') %>
