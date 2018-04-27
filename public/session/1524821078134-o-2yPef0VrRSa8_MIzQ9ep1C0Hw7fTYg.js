@@ -1,0 +1,1 @@
+module.exports = {"user":{"user":"lin","pass":"7c4a8d09ca3762af61e59520943dc26494f8941b","sex":"boy","describe":"dssssssssssssssssssfsdfsd","avatar":"koa_blog2018042705254497.jpg","_id":"5ae2ec98305ac51d2012e0f8","date":"2018-04-27T09:25:44.528Z","__v":0},"_expire":1524907544553,"_maxAge":86400000};

@@ -2,18 +2,28 @@ const router = require('koa-router')()
 const fs = require('fs');
 const moment = require('moment');
 const sha1 = require('sha1');
+
 const ModelUser = require('../models/users');
+const checkLogin = require('../middlewares/check').checkLogin;
 
+//首页
+router.get('/',checkLogin, async (ctx, next) => {
+  // if (!ctx.session.user) {
+  //   return ctx.redirect('/register')
+  // }
+  // console.log(ctx.session.user)
+  await ctx.render('index')
+});
 
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
-  })
-})
+router.get('/login',require('./login').get)
+router.post('/login',require('./login').post)
+
+//注册页 get
 router.get('/register', async (ctx, next) => {
   await ctx.render('register')
 })
-//路由  
+
+//这册页 post
 router.post('/register', async (ctx, next) => {
   const file = ctx.request.body.files.file;    // 获取上传文件
   const reader = fs.createReadStream(file.path);  // 创建可读流
@@ -31,10 +41,15 @@ router.post('/register', async (ctx, next) => {
     avatar: img_url
   }
 
-  ModelUser.create(user)
+  await ModelUser.create(user)
     .then((res) => {
-      
+      //存储删除密码的session
+      delete res.pass;
+      const session_user = res;
+      ctx.session.user = session_user;
+      ctx.render('index',{user:session_user})
     })
+
 })
 
 router.get('/string', async (ctx, next) => {
