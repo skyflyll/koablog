@@ -2,20 +2,18 @@ const router = require('koa-router')()
 const fs = require('fs');
 const moment = require('moment');
 const sha1 = require('sha1');
-
 const ModelUser = require('../models/users');
 const checkLogin = require('../middlewares/check').checkLogin;
 
 //首页
 router.get('/',checkLogin, async (ctx, next) => {
-  // if (!ctx.session.user) {
-  //   return ctx.redirect('/register')
-  // }
-  // console.log(ctx.session.user)
   await ctx.render('index')
 });
 
+// 登录
 router.get('/login',require('./login').get)
+
+// 登录 post
 router.post('/login',require('./login').post)
 
 //注册页 get
@@ -44,15 +42,23 @@ router.post('/register', async (ctx, next) => {
   await ModelUser.create(user)
     .then((res) => {
       //存储删除密码的session
-      delete res.pass;
       const session_user = res;
+      session_user.pass=null;
+      delete session_user.pass;
       ctx.session.user = session_user;
+
+      console.log("register-----------",ctx.session.user)
       ctx.render('index',{user:session_user})
     })
 
 })
 
-router.get('/string', async (ctx, next) => {
+router.get('/logout',async (ctx,next)=>{
+  ctx.session.user = '';
+  await ctx.redirect('/login')
+})
+
+router.get('/post', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })
 

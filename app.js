@@ -22,6 +22,8 @@ onerror(app)
 // }))
 
 //koa-session设置会话
+
+
 app.keys = ['some secret hurr'];
 
 const store ={
@@ -93,6 +95,12 @@ app.use(async (ctx, next) => {
     fs.appendFileSync('./logger/logger.txt', start.toUTCString() + logger + '写入日志\n', function (err) {
         if (err) console.error(err);
     });
+})
+
+app.use( async (ctx,next)=>{
+    ctx.state.user = ctx.session.user
+    console.log('user----------',ctx.session.user)
+    await next();    
 })
 
 //设置路由

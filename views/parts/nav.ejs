@@ -1,0 +1,29 @@
+<div class="nav clearfix">
+    <div class="nav-wrap">
+        <div class="left-wrap">
+            <h1>KOA TEST BLOG</h1>
+        </div>
+        <div class="right-wrap">
+            <% if(user){ %>
+                <ul>
+                    <li>
+                        <a href="javascript:;"><span>您好 &nbsp;</span><%- user.user %> </a> 
+                    </li>
+                    <li>
+                        <a href="/logout">注销</a>
+                    </li>
+                </ul>
+                
+                <% }else{ %>
+                    <ul>
+                        <li>
+                            <a href="/login">登录</a>
+                        </li>
+                        <li>
+                            <a href="/register">注册</a>
+                        </li>
+                    </ul>
+                    <% } %>
+        </div>
+    </div>
+</div>
